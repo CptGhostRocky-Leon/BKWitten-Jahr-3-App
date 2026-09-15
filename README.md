@@ -10,7 +10,7 @@ Dieses Dokument beschreibt die Git-Workflows, Branching-Konventionen und Commit-
 Jeder Mitwirkende besitzt einen eigenen Hauptentwicklungs-Branch, um dort fortlaufend Änderungen vorzubereiten:
 - Format: `<name>/development`
 - Beispiele:
-  - `rocky/development`
+  - `leon/development`
   - `kim/development`
 
 ---
