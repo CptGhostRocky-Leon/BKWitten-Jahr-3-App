@@ -10,30 +10,34 @@ desktop.ini
 !.vscode/launch.json
 !.vscode/extensions.json
 .idea/
+.fleet/
+.zed/
 *.swp
 *.swo
 *~
 
-# Node / Web / Mobile
-node_modules/
+# Laravel & PHP
+/vendor/
+/.phpunit.result.cache
+/storage/*.key
+.phpunit.cache/
+.env
+.env.backup
+.env.production
+
+# SQLite Database
+database/*.sqlite
+database/*.sqlite-journal
+
+# Node & Frontend Build
+/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-dist/
-build/
-.env
-.env.local
-.env.*.local
-
-# Python / Backend
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.venv/
-venv/
-ENV/
+/public/build/
+/public/hot/
+/public/storage/
 
 # Logs & Temp
 logs/
