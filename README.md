@@ -1,6 +1,46 @@
-# BKWitten Jahr 3 App
+Dieses Dokument beschreibt das lokale Setup, die UI-Architektur und die Git-Richtlinien für unser Projekt.
 
-Dieses Dokument beschreibt die Git-Workflows, Branching-Konventionen und Commit-Richtlinien für unser Projekt.
+---
+
+## 🚀 Lokale Entwicklung (Schnellstart)
+
+Voraussetzungen: **PHP >= 8.3**, **Composer** und **Node.js (>= 20)**.
+
+### Einmalige Einrichtung nach dem Klonen:
+```bash
+# 1. Abhängigkeiten installieren
+composer install
+npm install
+
+# 2. Umgebungskonfiguration anlegen & Key generieren
+cp .env.example .env
+php artisan key:generate
+
+# 3. Lokale SQLite-Datenbank erstellen & migrieren
+php artisan migrate
+
+# 4. Frontend-Assets kompilieren
+npm run build
+```
+
+### Entwicklungsserver starten:
+```bash
+composer run dev
+```
+> Die App ist anschließend unter **http://127.0.0.1:8000** erreichbar.
+
+---
+
+## 🎨 UI-Architektur (Atomic Design)
+
+Wir strukturieren unsere Oberfläche nach **Atomic Design**:
+* **Atome** (`resources/views/components/atoms/`): Buttons, Badges, Labels
+* **Moleküle** (`resources/views/components/molecules/`): Button-Gruppen, Zähleranzeigen
+* **Organismen** (`resources/views/components/organisms/` und `resources/views/livewire/`): Navbar, Livewire-Komponenten mit Geschäftslogik
+* **Layouts** (`resources/views/components/layouts/`): HTML-Skelett der Anwendung
+* **Seiten** (`resources/views/`): Konkrete Blade-Views
+
+Ausführlicher Leitfaden mit Beispielen: [docs/ATOMIC_DESIGN.md](docs/ATOMIC_DESIGN.md)
 
 ---
 
@@ -95,3 +135,9 @@ Alle Commit-Nachrichten sollen nach dem Standard von [Conventional Commits v1.0.
      git branch -d feat/#12-login-screen
      git push origin --delete feat/#12-login-screen
      ```
+
+---
+
+## 🔄 KI-Nutzung
+
+Erstellt mit KI-Hilfe. Der Text wurde grob vorgeschrieben, durch eine KI erweitert und korrigiert. Anschließend wurden manuelle Anpassungen vorgenommen.
