@@ -21,6 +21,10 @@ return [
             'label' => 'Homepage',
             'url' => 'https://www.bkwitten.net/',
         ],
+        [
+            'label' => 'Neue Info anlegen',
+            'route' => 'info.anlegen',
+        ],
     ],
 
     // Rechtes Menü (Benutzerkonto Dropdown)
