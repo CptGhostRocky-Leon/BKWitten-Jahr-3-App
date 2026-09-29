@@ -18,7 +18,11 @@
         </header>
         
         <main class="flex-1 flex flex-col">
+            <x-organisms.newsfeed></x-organisms.newsfeed>
+            
+            {{--
             {{ $slot }}
+            --}}
         </main>
 
         <footer class="border-t bg-white">
