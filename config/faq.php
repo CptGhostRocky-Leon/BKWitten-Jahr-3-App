@@ -242,20 +242,53 @@ return [
 
         'lerncoaching' => [
             'title' => 'Lerncoaching',
-            'description' => 'Das Lerncoaching unterstützt Schülerinnen und Schüler dabei, ihr Lernen selbstständig zu organisieren und eigene Strategien zur Weiterentwicklung ihrer Kompetenzen zu entwickeln.',
+            'description' => 'Mehr Klarheit. Mehr Plan. Mehr Du.',
             'image' => null,
             'content' => [
                 [
-                    'title' => 'Was ist Lerncoaching?',
                     'blocks' => [
+
                         [
                             'type' => 'text',
-                            'text' => 'Das Lerncoaching unterstützt Schülerinnen und Schüler auf dem Weg zu einem zunehmend selbstregulierten Lernen. Dabei werden individuelle Strategien entwickelt, die dabei helfen können, das eigene Lernen zu planen, zu reflektieren und weiterzuentwickeln.',
+                            'text' => 'Du willst dein Lernen verbessern? Dann bist du bei uns genau richtig.',
                         ],
+
+                        [
+                            'type' => 'heading',
+                            'text' => 'Im Lerncoaching …',
+                        ],
+
+                        [
+                            'type' => 'list',
+                            'items' => [
+                                'analysieren wir gemeinsam deine aktuelle Lernsituation',
+                                'entwickeln passende Lernstrategien',
+                                'arbeiten an Motivation und Selbstorganisation',
+                                'stärken dein Selbstvertrauen',
+                            ],
+                        ],
+
                         [
                             'type' => 'text',
-                            'text' => 'Das Lerncoaching knüpft an die individuelle Beratung und Unterstützung der Schülerinnen und Schüler an.',
+                            'text' => 'Das Coaching ist freiwillig, vertraulich und auf deine persönlichen Ziele abgestimmt.',
                         ],
+
+                        [
+                            'type' => 'button',
+                            'text' => 'Jetzt Termin buchen',
+                            'url' => 'https://bookings.cloud.microsoft/book/Lerncoaching1@bkwitten.net/?ismsaljsauthenabled',
+                        ],
+
+                        [
+                            'type' => 'text',
+                            'text' => 'Du hast Fragen? Dann nimm direkt Kontakt mit uns auf und sende uns eine E-Mail an:',
+                        ],
+
+                        [
+                            'type' => 'email',
+                            'email' => 'lerncoaching@bkwitten.net',
+                        ],
+
                     ],
                 ],
             ],

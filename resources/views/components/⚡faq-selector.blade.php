@@ -93,7 +93,7 @@ new class extends Component
 
             @if (!empty($section['content']))
 
-                <div class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
+                <div class="mt-6 divide-y divide-slate-200">
 
                     @foreach ($section['content'] as $content)
 
@@ -104,40 +104,46 @@ new class extends Component
 
                         <article>
 
-                            {{-- Accordion-Überschrift --}}
-                            <button
-                                type="button"
-                                @click="toggleContent('{{ $contentKey }}')"
-                                class="flex w-full items-center justify-between gap-4 py-4 text-left"
-                                :aria-expanded="isOpen('{{ $contentKey }}')"
-                                aria-controls="faq-content-{{ $contentKey }}"
+                @if (!empty($content['title']))
+                        {{-- Accordion-Überschrift --}}
+                        <button
+                            type="button"
+                            @click="toggleContent('{{ $contentKey }}')"
+                            class="flex w-full items-center justify-between gap-4 py-4 text-left"
+                            :aria-expanded="isOpen('{{ $contentKey }}')"
+                            aria-controls="faq-content-{{ $contentKey }}"
+                        >
+                            <span class="text-lg font-semibold text-slate-900">
+                                {{ $content['title'] }}
+                            </span>
+
+                            <span
+                                class="flex h-8 w-8 shrink-0 items-center justify-center
+                                    text-slate-600 transition-transform duration-200"
+                                :class="{ 'rotate-180': isOpen('{{ $contentKey }}') }"
+                                aria-hidden="true"
                             >
-
-                                <span class="text-lg font-semibold text-slate-900">
-                                    {{ $content['title'] }}
+                                <span class="text-xl leading-none">
+                                    ⌄
                                 </span>
-
-                                <span
-                                    class="flex h-8 w-8 shrink-0 items-center justify-center
-                                           text-slate-600 transition-transform duration-200"
-                                    :class="{ 'rotate-180': isOpen('{{ $contentKey }}') }"
-                                    aria-hidden="true"
-                                >
-                                    <span class="text-xl leading-none">
-                                        ⌄
-                                    </span>
-                                </span>
-
-                            </button>
-
-
-                            {{-- Accordion-Inhalt --}}
-                            <div
-                                id="faq-content-{{ $contentKey }}"
-                                x-show="isOpen('{{ $contentKey }}')"
-                                x-cloak
-                                class="pb-6 pr-2"
-                            >
+                            </span>
+                        </button>
+                    @endif
+                                    
+                    {{-- Accordion-Inhalt --}}
+                    @if (!empty($content['title']))
+                        <div
+                            id="faq-content-{{ $contentKey }}"
+                            x-show="isOpen('{{ $contentKey }}')"
+                            x-cloak
+                            class="pb-6 pr-2"
+                        >
+                    @else
+                        <div
+                            id="faq-content-{{ $contentKey }}"
+                            class="pb-6 pr-2"
+                        >
+                    @endif
 
                                 @if (!empty($content['blocks']))
 
@@ -209,6 +215,17 @@ new class extends Component
 
                                                 </div>
 
+                                            @elseif (($block['type'] ?? '') === 'button')
+                                                <div class="mb-6">
+                                                    <a
+                                                        href="{{ $block['url'] }}"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                    >
+                                                        {{ $block['text'] }}
+                                                    </a>
+                                                </div>
 
                                             {{-- E-MAIL --}}
                                             @elseif (($block['type'] ?? '') === 'email')
