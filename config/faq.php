@@ -10,9 +10,8 @@ return [
             'image' => null,
             'content' => [
                 [
-                    'title' => 'Unterrichts- und Pausenzeiten',
                     'blocks' => [
-                        [
+                            [
                             'type' => 'table',
                             'title' => 'Unterricht',
                             'headers' => [

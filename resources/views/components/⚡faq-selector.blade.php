@@ -105,7 +105,8 @@ new class extends Component
                         <article>
 
                 @if (!empty($content['title']))
-                        {{-- Accordion-Überschrift --}}
+
+                        //Accordion-Überschrift
                         <button
                             type="button"
                             @click="toggleContent('{{ $contentKey }}')"
@@ -130,7 +131,7 @@ new class extends Component
                         </button>
                     @endif
                                     
-                    {{-- Accordion-Inhalt --}}
+                    //Accordion-Inhalt
                     @if (!empty($content['title']))
                         <div
                             id="faq-content-{{ $contentKey }}"
@@ -146,26 +147,16 @@ new class extends Component
                     @endif
 
                                 @if (!empty($content['blocks']))
-
                                     <div>
-
                                         @foreach ($content['blocks'] as $block)
-
-                                            {{-- TEXT --}}
                                             @if (($block['type'] ?? '') === 'text')
-
                                                 <p class="mb-4 leading-7 text-slate-700">
                                                     {{ $block['text'] }}
                                                 </p>
 
-
-                                            {{-- TEXT MIT INLINE-LINK --}}
                                             @elseif (($block['type'] ?? '') === 'text_with_link')
-
                                                 <p class="mb-4 leading-7 text-slate-700">
-
                                                     {{ $block['text_before'] }}
-
                                                     <a
                                                         href="{{ $block['url'] }}"
                                                         target="_blank"
@@ -174,15 +165,12 @@ new class extends Component
                                                     >
                                                         {{ $block['link_text'] }}
                                                     </a>
-
                                                     {{ $block['text_after'] ?? '' }}
-
                                                 </p>
 
 
-                                            {{-- ÜBERSCHRIFT --}}
+                                            //Überschrift
                                             @elseif (($block['type'] ?? '') === 'heading')
-
                                                 <h4
                                                     class="mb-3 mt-6 text-base font-semibold text-slate-900 first:mt-0"
                                                 >
@@ -190,7 +178,7 @@ new class extends Component
                                                 </h4>
 
 
-                                            {{-- LISTE --}}
+                                            //Liste
                                             @elseif (($block['type'] ?? '') === 'list')
                                                 <ul class="mt-2 mb-8 list-disc space-y-2 pl-5 leading-7 text-slate-700">
                                                     @foreach ($block['items'] as $item)
@@ -199,11 +187,9 @@ new class extends Component
                                                 </ul>
 
 
-                                            {{-- NORMALER LINK --}}
+                                            //Link
                                             @elseif (($block['type'] ?? '') === 'link')
-
                                                 <div class="mb-4">
-
                                                     <a
                                                         href="{{ $block['url'] }}"
                                                         target="_blank"
@@ -212,7 +198,6 @@ new class extends Component
                                                     >
                                                         {{ $block['text'] }}
                                                     </a>
-
                                                 </div>
 
                                             @elseif (($block['type'] ?? '') === 'button')
@@ -227,7 +212,7 @@ new class extends Component
                                                     </a>
                                                 </div>
 
-                                            {{-- E-MAIL --}}
+                                            //Mail
                                             @elseif (($block['type'] ?? '') === 'email')
                                                 <div class="mb-8">
                                                     <a
@@ -238,27 +223,22 @@ new class extends Component
                                                     </a>
                                                 </div>
 
-                                            {{-- PERSON --}}
+                                            //Person
                                             @elseif (($block['type'] ?? '') === 'person')
-
                                                 <div class="mb-6 mt-6">
-
                                                     @if (!empty($block['name']))
                                                         <h4 class="font-semibold text-slate-900">
                                                             {{ $block['name'] }}
                                                         </h4>
                                                     @endif
 
-
                                                     <div class="mt-2 space-y-1 leading-7 text-slate-700">
-
                                                         @if (!empty($block['room']))
                                                             <p>
                                                                 <strong>Raum:</strong>
                                                                 {{ $block['room'] }}
                                                             </p>
                                                         @endif
-
 
                                                         @if (!empty($block['phone']))
                                                             <p>
@@ -267,14 +247,12 @@ new class extends Component
                                                             </p>
                                                         @endif
 
-
                                                         @if (!empty($block['mobile']))
                                                             <p>
                                                                 <strong>Mobil:</strong>
                                                                 {{ $block['mobile'] }}
                                                             </p>
                                                         @endif
-
 
                                                         @if (!empty($block['email']))
                                                             <p class="mb-6">
@@ -285,42 +263,31 @@ new class extends Component
                                                             </p>
                                                         @endif
 
-
                                                         @if (!empty($block['focus']))
                                                             <p>
                                                                 <strong>Schwerpunkt:</strong>
                                                                 {{ $block['focus'] }}
                                                             </p>
                                                         @endif
-
                                                     </div>
-
                                                 </div>
 
 
-                                            {{-- TABELLE --}}
+                                           //Tabelle
                                             @elseif (($block['type'] ?? '') === 'table')
-
                                                 @if (!empty($block['title']))
                                                     <h4 class="mb-3 mt-6 text-base font-semibold text-slate-900">
                                                         {{ $block['title'] }}
                                                     </h4>
                                                 @endif
 
-
                                                 <div class="mb-6 overflow-x-auto rounded-lg border border-slate-200">
-
                                                     <table class="w-full border-collapse text-left text-sm">
-
                                                         {{-- Gruppierte Tabellenüberschrift --}}
                                                         @if (!empty($block['groupedHeaders']))
-
                                                             <thead class="bg-slate-100">
-
                                                                 <tr>
-
                                                                     @foreach ($block['groupedHeaders'] as $header)
-
                                                                         <th
                                                                             @if (!empty($header['colspan']))
                                                                                 colspan="{{ $header['colspan'] }}"
@@ -336,18 +303,13 @@ new class extends Component
                                                                         >
                                                                             {{ $header['text'] }}
                                                                         </th>
-
                                                                     @endforeach
 
                                                                 </tr>
 
-
                                                                 @if (!empty($block['subHeaders']))
-
                                                                     <tr>
-
                                                                         @foreach ($block['subHeaders'] as $header)
-
                                                                             <th
                                                                                 class="border-r border-slate-200 px-4 py-3
                                                                                        text-center font-medium text-slate-700
@@ -355,25 +317,17 @@ new class extends Component
                                                                             >
                                                                                 {{ $header }}
                                                                             </th>
-
                                                                         @endforeach
-
                                                                     </tr>
-
                                                                 @endif
-
                                                             </thead>
 
-
-                                                        {{-- Normale Tabellenüberschrift --}}
+                                                        //Überschrift Tabelle
                                                         @else
 
                                                             <thead class="bg-slate-100">
-
                                                                 <tr>
-
                                                                     @foreach ($block['headers'] as $header)
-
                                                                         <th
                                                                             class="border-b border-r border-slate-200 px-4 py-3
                                                                                    font-semibold text-slate-900
@@ -381,27 +335,20 @@ new class extends Component
                                                                         >
                                                                             {{ $header }}
                                                                         </th>
-
                                                                     @endforeach
-
                                                                 </tr>
 
                                                             </thead>
-
                                                         @endif
 
-
-                                                        {{-- Tabelleninhalt --}}
+                                                        //Tabelleninhalt
                                                         <tbody>
 
                                                             @php
                                                                 $lessonRowIndex = 0;
                                                             @endphp
 
-
                                                             @foreach ($block['rows'] as $row)
-
-                                                                {{-- PAUSE --}}
                                                                 @if (($row['type'] ?? '') === 'pause')
 
                                                                     <tr>
@@ -414,11 +361,10 @@ new class extends Component
                                                                         >
                                                                             Pause
                                                                         </td>
-
                                                                     </tr>
 
 
-                                                                {{-- NORMALE ZEILE --}}
+                                                                //Zeiel
                                                                 @else
 
                                                                     <tr
@@ -430,54 +376,32 @@ new class extends Component
                                                                     >
 
                                                                         @foreach ($row as $cell)
-
                                                                             <td
                                                                                 class="border-r border-slate-200 px-4 py-3
                                                                                        text-slate-700 last:border-r-0"
                                                                             >
                                                                                 {{ $cell }}
                                                                             </td>
-
                                                                         @endforeach
-
                                                                     </tr>
-
 
                                                                     @php
                                                                         $lessonRowIndex++;
                                                                     @endphp
-
                                                                 @endif
-
                                                             @endforeach
-
                                                         </tbody>
-
                                                     </table>
-
                                                 </div>
-
-
                                             @endif
-
                                         @endforeach
-
                                     </div>
-
                                 @endif
-
                             </div>
-
                         </article>
-
                     @endforeach
-
                 </div>
-
             @endif
-
         </section>
-
     @endforeach
-
 </div>
