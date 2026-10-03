@@ -8,3 +8,4 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/neue-info-anlegen', NeueInfoAnlegen::class) ->name('info.anlegen');
+Route::view('/faq', 'faq')->name('faq');

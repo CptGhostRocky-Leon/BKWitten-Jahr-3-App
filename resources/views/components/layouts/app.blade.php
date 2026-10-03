@@ -7,6 +7,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link rel="manifest" href="/manifest.webmanifest">
+        <meta name="theme-color" content="#ffffff"> 
+        
         <title>{{ $title }} • {{ config('app.name', 'BKWitten') }}</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
