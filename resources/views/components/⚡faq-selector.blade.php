@@ -29,20 +29,11 @@ new class extends Component
     class="w-full"
 >
 
-    <label
-        for="faq-section"
-        class="mb-3 block text-xl font-semibold text-slate-900"
-    >
-        Bereich auswählen
-    </label>
-
-    <select
+    <x-molecules.select-field
         id="faq-section"
+        label="Bereich auswählen"
         x-model="selectedSection"
         @change="openContent = {}"
-        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3.5
-               text-base text-slate-900 shadow-sm
-               focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-200"
     >
         <option value="">
             Bitte Bereich auswählen
@@ -53,8 +44,7 @@ new class extends Component
                 {{ $section['title'] }}
             </option>
         @endforeach
-    </select>
-
+    </x-molecules.select-field>
 
     @foreach ($sections as $id => $section)
 
@@ -72,13 +62,11 @@ new class extends Component
                 {{ $section['title'] }}
             </h2>
 
-
             @if (!empty($section['description']))
                 <p class="mt-3 leading-7 text-slate-700">
                     {{ $section['description'] }}
                 </p>
             @endif
-
 
             @if (!empty($section['image']))
                 <div class="mt-6">
@@ -90,61 +78,18 @@ new class extends Component
                 </div>
             @endif
 
-
             @if (!empty($section['content']))
 
                 <div class="mt-6 divide-y divide-slate-200">
-
                     @foreach ($section['content'] as $content)
-
                         @php
                             $contentKey = $id . '-' . $loop->index;
                         @endphp
-
-
                         <article>
-
-                @if (!empty($content['title']))
-
-                        //Accordion-Überschrift
-                        <button
-                            type="button"
-                            @click="toggleContent('{{ $contentKey }}')"
-                            class="flex w-full items-center justify-between gap-4 py-4 text-left"
-                            :aria-expanded="isOpen('{{ $contentKey }}')"
-                            aria-controls="faq-content-{{ $contentKey }}"
-                        >
-                            <span class="text-lg font-semibold text-slate-900">
-                                {{ $content['title'] }}
-                            </span>
-
-                            <span
-                                class="flex h-8 w-8 shrink-0 items-center justify-center
-                                    text-slate-600 transition-transform duration-200"
-                                :class="{ 'rotate-180': isOpen('{{ $contentKey }}') }"
-                                aria-hidden="true"
+                            <x-molecules.accordion-item
+                                :title="$content['title'] ?? null"
+                                :content-key="$contentKey"
                             >
-                                <span class="text-xl leading-none">
-                                    ⌄
-                                </span>
-                            </span>
-                        </button>
-                    @endif
-                                    
-                    //Accordion-Inhalt
-                    @if (!empty($content['title']))
-                        <div
-                            id="faq-content-{{ $contentKey }}"
-                            x-show="isOpen('{{ $contentKey }}')"
-                            x-cloak
-                            class="pb-6 pr-2"
-                        >
-                    @else
-                        <div
-                            id="faq-content-{{ $contentKey }}"
-                            class="pb-6 pr-2"
-                        >
-                    @endif
 
                                 @if (!empty($content['blocks']))
                                     <div>
@@ -155,21 +100,17 @@ new class extends Component
                                                 </p>
 
                                             @elseif (($block['type'] ?? '') === 'text_with_link')
+
                                                 <p class="mb-4 leading-7 text-slate-700">
                                                     {{ $block['text_before'] }}
-                                                    <a
-                                                        href="{{ $block['url'] }}"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="font-medium text-blue-700 underline hover:text-blue-900"
-                                                    >
+
+                                                    <x-atoms.text-link :href="$block['url']">
                                                         {{ $block['link_text'] }}
-                                                    </a>
+                                                    </x-atoms.text-link>
+
                                                     {{ $block['text_after'] ?? '' }}
                                                 </p>
 
-
-                                            //Überschrift
                                             @elseif (($block['type'] ?? '') === 'heading')
                                                 <h4
                                                     class="mb-3 mt-6 text-base font-semibold text-slate-900 first:mt-0"
@@ -177,113 +118,63 @@ new class extends Component
                                                     {{ $block['text'] }}
                                                 </h4>
 
-
-                                            //Liste
                                             @elseif (($block['type'] ?? '') === 'list')
+
                                                 <ul class="mt-2 mb-8 list-disc space-y-2 pl-5 leading-7 text-slate-700">
                                                     @foreach ($block['items'] as $item)
                                                         <li>{{ $item }}</li>
                                                     @endforeach
                                                 </ul>
 
-
-                                            //Link
                                             @elseif (($block['type'] ?? '') === 'link')
                                                 <div class="mb-4">
-                                                    <a
-                                                        href="{{ $block['url'] }}"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="font-medium text-blue-700 underline hover:text-blue-900"
-                                                    >
+                                                    <x-atoms.text-link :href="$block['url']">
                                                         {{ $block['text'] }}
-                                                    </a>
+                                                    </x-atoms.text-link>
                                                 </div>
 
                                             @elseif (($block['type'] ?? '') === 'button')
+
                                                 <div class="mb-6">
-                                                    <a
-                                                        href="{{ $block['url'] }}"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                                    >
+                                                    <x-atoms.link-button :href="$block['url']">
                                                         {{ $block['text'] }}
-                                                    </a>
+                                                    </x-atoms.link-button>
                                                 </div>
 
-                                            //Mail
                                             @elseif (($block['type'] ?? '') === 'email')
                                                 <div class="mb-8">
-                                                    <a
-                                                        href="mailto:{{ $block['email'] }}"
-                                                        class="font-medium text-blue-700 underline hover:text-blue-900"
-                                                    >
-                                                        {{ $block['email'] }}
-                                                    </a>
+                                                    <x-atoms.email-link
+                                                        :email="$block['email']"
+                                                    />
                                                 </div>
 
-                                            //Person
                                             @elseif (($block['type'] ?? '') === 'person')
-                                                <div class="mb-6 mt-6">
-                                                    @if (!empty($block['name']))
-                                                        <h4 class="font-semibold text-slate-900">
-                                                            {{ $block['name'] }}
-                                                        </h4>
-                                                    @endif
+                                                <x-molecules.person-info
+                                                    :name="$block['name'] ?? null"
+                                                    :room="$block['room'] ?? null"
+                                                    :phone="$block['phone'] ?? null"
+                                                    :mobile="$block['mobile'] ?? null"
+                                                    :email="$block['email'] ?? null"
+                                                    :focus="$block['focus'] ?? null"
+                                                />
 
-                                                    <div class="mt-2 space-y-1 leading-7 text-slate-700">
-                                                        @if (!empty($block['room']))
-                                                            <p>
-                                                                <strong>Raum:</strong>
-                                                                {{ $block['room'] }}
-                                                            </p>
-                                                        @endif
-
-                                                        @if (!empty($block['phone']))
-                                                            <p>
-                                                                <strong>Tel.:</strong>
-                                                                {{ $block['phone'] }}
-                                                            </p>
-                                                        @endif
-
-                                                        @if (!empty($block['mobile']))
-                                                            <p>
-                                                                <strong>Mobil:</strong>
-                                                                {{ $block['mobile'] }}
-                                                            </p>
-                                                        @endif
-
-                                                        @if (!empty($block['email']))
-                                                            <p class="mb-6">
-                                                                <strong>E-Mail:</strong>
-                                                                <a href="mailto:{{ $block['email'] }}" class="text-blue-700 underline hover:text-blue-900">
-                                                                    {{ $block['email'] }}
-                                                                </a>
-                                                            </p>
-                                                        @endif
-
-                                                        @if (!empty($block['focus']))
-                                                            <p>
-                                                                <strong>Schwerpunkt:</strong>
-                                                                {{ $block['focus'] }}
-                                                            </p>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-
-                                           //Tabelle
+                                            //Tabelle
                                             @elseif (($block['type'] ?? '') === 'table')
                                                 @if (!empty($block['title']))
-                                                    <h4 class="mb-3 mt-6 text-base font-semibold text-slate-900">
+                                                    <h4
+                                                        class="mb-3 mt-6 text-base font-semibold text-slate-900"
+                                                    >
                                                         {{ $block['title'] }}
                                                     </h4>
                                                 @endif
 
-                                                <div class="mb-6 overflow-x-auto rounded-lg border border-slate-200">
-                                                    <table class="w-full border-collapse text-left text-sm">
-                                                        {{-- Gruppierte Tabellenüberschrift --}}
+                                                <div
+                                                    class="mb-6 overflow-x-auto rounded-lg border border-slate-200"
+                                                >
+
+                                                    <table
+                                                        class="w-full border-collapse text-left text-sm"
+                                                    >
                                                         @if (!empty($block['groupedHeaders']))
                                                             <thead class="bg-slate-100">
                                                                 <tr>
@@ -322,9 +213,7 @@ new class extends Component
                                                                 @endif
                                                             </thead>
 
-                                                        //Überschrift Tabelle
                                                         @else
-
                                                             <thead class="bg-slate-100">
                                                                 <tr>
                                                                     @foreach ($block['headers'] as $header)
@@ -337,22 +226,17 @@ new class extends Component
                                                                         </th>
                                                                     @endforeach
                                                                 </tr>
-
                                                             </thead>
                                                         @endif
 
-                                                        //Tabelleninhalt
                                                         <tbody>
 
                                                             @php
                                                                 $lessonRowIndex = 0;
                                                             @endphp
-
                                                             @foreach ($block['rows'] as $row)
                                                                 @if (($row['type'] ?? '') === 'pause')
-
                                                                     <tr>
-
                                                                         <td
                                                                             colspan="{{ count($block['headers']) }}"
                                                                             class="border-y border-slate-200 bg-slate-200
@@ -363,10 +247,7 @@ new class extends Component
                                                                         </td>
                                                                     </tr>
 
-
-                                                                //Zeiel
                                                                 @else
-
                                                                     <tr
                                                                         @if ($lessonRowIndex % 2 === 1)
                                                                             class="bg-slate-50"
@@ -374,7 +255,6 @@ new class extends Component
                                                                             class="bg-white"
                                                                         @endif
                                                                     >
-
                                                                         @foreach ($row as $cell)
                                                                             <td
                                                                                 class="border-r border-slate-200 px-4 py-3
@@ -384,7 +264,6 @@ new class extends Component
                                                                             </td>
                                                                         @endforeach
                                                                     </tr>
-
                                                                     @php
                                                                         $lessonRowIndex++;
                                                                     @endphp
@@ -397,7 +276,7 @@ new class extends Component
                                         @endforeach
                                     </div>
                                 @endif
-                            </div>
+                            </x-molecules.accordion-item>
                         </article>
                     @endforeach
                 </div>
