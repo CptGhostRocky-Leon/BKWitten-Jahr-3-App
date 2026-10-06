@@ -1,5 +1,11 @@
 <div class="min-h-screen bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-4xl">
+        @if (session('erfolg'))
+            <div class="mb-6 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm px-4 py-2">
+                {{ session('erfolg') }}
+            </div>
+        @endif
+
         <div class="mb-10 text-center">
             <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                 Was gibt's Neues?

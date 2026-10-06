@@ -57,8 +57,8 @@ class NeueInfoAnlegen extends Component
             ]);
         }
 
-        $this->reset(['titel', 'nachricht', 'anhang']);
-        $this->erfolg = 'Information wurde erfolgreich erstellt.';
+        session()->flash('erfolg', 'Information wurde erfolgreich erstellt.');
+        $this->redirectRoute('home', navigate: true);
     }
 
     public function render()
