@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Anhang extends Model
 {
@@ -21,5 +22,10 @@ class Anhang extends Model
     public function information(): BelongsTo
     {
         return $this->belongsTo(Information::class);
+    }
+    
+    public function getUrlAttribute(): string
+    {
+        return Storage::url($this->dateipfad);
     }
 }
