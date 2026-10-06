@@ -1,10 +1,11 @@
-const CACHE_NAME = 'bkwitten-faq-v3';
+const CACHE_NAME = 'bkwitten-faq-v5';
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll([
                 '/faq',
+                '/offline',
                 '/manifest.webmanifest',
                 '/images/faq/schulgebäude.png',
             ]);
@@ -38,22 +39,22 @@ self.addEventListener('fetch', (event) => {
 
     const url = new URL(request.url);
 
-    // Nur eigene Ressourcen behandeln
     if (url.origin !== self.location.origin) {
         return;
     }
 
-    // Der News-Feed wird nicht offline bereitgestellt.
-    if (url.pathname.startsWith('/news')) {
+    if(url.pathname === '/'){
+        event.respondWith(
+            fetch(request)
+            .catch(() => {
+                return caches.match('/offline');
+            })
+        );
         return;
     }
 
-    /*
-     * FAQ:
-     * Wenn online, wird die aktuelle FAQ verwendet und
-     * gleichzeitig aktualisiert. Offline wird die gespeicherte
-     * Version verwendet.
-     */
+    //Wenn online, wird die aktuelle FAQ verwendet und aktualisier
+    //Offline wird der gespeicherte Cache verwendet
     if (url.pathname === '/faq') {
         event.respondWith(
             fetch(request)
@@ -74,11 +75,7 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    /*
-     * Statische Dateien:
-     * CSS, JavaScript, Bilder und Manifest werden beim ersten
-     * Online-Aufruf gespeichert.
-     */
+    // Statische Dateien über den Cache laden
     const isStaticResource =
         request.destination === 'style' ||
         request.destination === 'script' ||
@@ -86,8 +83,8 @@ self.addEventListener('fetch', (event) => {
         request.destination === 'font' ||
         url.pathname === '/manifest.webmanifest';
 
-    if (isStaticResource) {
-        event.respondWith(
+        if (isStaticResource) {
+            event.respondWith(
             caches.match(request).then((cachedResponse) => {
                 if (cachedResponse) {
                     return cachedResponse;
@@ -103,6 +100,6 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 });
             })
-        );
-    }
+            );
+        }
 });
