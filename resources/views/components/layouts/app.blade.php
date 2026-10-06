@@ -28,7 +28,7 @@
         <x-molecules.nav-drawer />
 
         {{-- Seiteninhalt (Slot) --}}
-        <main class="flex-1 flex flex-col">
+        <main class="flex-1 flex flex-col pb-20">
             {{ $slot }}
         </main>
 

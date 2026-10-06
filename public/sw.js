@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bkwitten-faq-v6';
+const CACHE_NAME = 'bkwitten-faq-v7';
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -9,7 +9,7 @@ self.addEventListener('install', (event) => {
                 '/offline',
                 '/offline.css',
                 '/manifest.webmanifest',
-                '/images/faq/schulgebäude.webp',
+                '/images/faq/schulgebaeude.webp',
             ]);
 
             const manifestResponse = await fetch('/build/manifest.json');

@@ -40,32 +40,44 @@
                 @if(($item['route'] ?? '') === 'faq')
                     <div x-data="{ faqOpen: false }">
 
-                        <button
-                            type="button"
-                            @click="faqOpen = !faqOpen"
-                            class="flex w-full items-center justify-between px-3 py-2.5 text-sm rounded-lg transition
+                        <div
+                            class="flex w-full items-center rounded-lg transition
                                 {{ $isActive
                                         ? 'bg-indigo-50 text-indigo-700 font-semibold'
                                         : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-600 font-medium' }}"
                         >
-                            <span>{{ $item['label'] ?? '' }}</span>
-
-                            <svg
-                                class="w-4 h-4 transition-transform duration-200"
-                                :class="{ 'rotate-180': faqOpen }"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
+                            <a
+                                href="{{ $href }}"
+                                @click="drawerOpen = false"
+                                class="flex-1 px-3 py-2.5 text-sm"
                             >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="m6 9 6 6 6-6"
-                                />
-                            </svg>
-                        </button>
+                                {{ $item['label'] ?? '' }}
+                            </a>
+
+                            <button
+                                type="button"
+                                @click="faqOpen = !faqOpen"
+                                class="px-3 py-2.5"
+                                :aria-expanded="faqOpen"
+                                aria-label="FAQ Unterseiten anzeigen"
+                            >
+                                <svg
+                                    class="w-4 h-4 transition-transform duration-200"
+                                    :class="{ 'rotate-180': faqOpen }"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="m6 9 6 6 6-6"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
 
                         <div
                             x-show="faqOpen"
