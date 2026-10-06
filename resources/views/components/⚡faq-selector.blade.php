@@ -15,7 +15,7 @@ new class extends Component
 
 <div
     x-data="{
-        selectedSection: '',
+        selectedSection: new URLSearchParams(window.location.search).get('section') || '',
         openContent: {},
 
         toggleContent(key) {

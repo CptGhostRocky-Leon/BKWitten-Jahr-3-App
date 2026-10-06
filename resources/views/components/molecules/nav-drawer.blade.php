@@ -37,15 +37,64 @@
                     $isActive = !empty($item['route']) && request()->routeIs($item['route']);
                 @endphp
 
-                <x-atoms.nav-link 
-                    :href="$href" 
-                    :active="$isActive"
-                >
-                    {{ $item['label'] ?? '' }}
-                </x-atoms.nav-link>
+                @if(($item['route'] ?? '') === 'faq')
+                    <div x-data="{ faqOpen: false }">
+
+                        <button
+                            type="button"
+                            @click="faqOpen = !faqOpen"
+                            class="flex w-full items-center justify-between px-3 py-2.5 text-sm rounded-lg transition
+                                {{ $isActive
+                                        ? 'bg-indigo-50 text-indigo-700 font-semibold'
+                                        : 'text-slate-700 hover:bg-slate-50 hover:text-indigo-600 font-medium' }}"
+                        >
+                            <span>{{ $item['label'] ?? '' }}</span>
+
+                            <svg
+                                class="w-4 h-4 transition-transform duration-200"
+                                :class="{ 'rotate-180': faqOpen }"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="m6 9 6 6 6-6"
+                                />
+                            </svg>
+                        </button>
+
+                        <div
+                            x-show="faqOpen"
+                            x-cloak
+                            class="ml-3 mt-1 space-y-1"
+                        >
+                            @foreach(config('faq.sections', []) as $sectionId => $section)
+                                <a
+                                    href="{{ route('faq') }}?section={{ $sectionId }}"
+                                    @click="drawerOpen = false"
+                                    class="block px-3 py-2 text-sm rounded-lg text-slate-600 hover:bg-slate-50 hover:text-indigo-600"
+                                >
+                                    {{ $section['title'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                @else
+                    <x-atoms.nav-link
+                        :href="$href"
+                        :active="$isActive"
+                    >
+                        {{ $item['label'] ?? '' }}
+                    </x-atoms.nav-link>
+                @endif
             @endforeach
         </nav>
-
+     
         {{-- Fußbereich --}}
         <div class="p-4 border-t border-slate-100 text-xs text-slate-400 text-center">
             BKWitten Jahr 3 App
