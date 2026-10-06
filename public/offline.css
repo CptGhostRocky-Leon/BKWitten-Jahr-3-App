@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.offline-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.offline-content {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.offline-content h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.offline-content p {
+    margin-top: 12px;
+    color: #64748b;
+}
+
+.offline-content a {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 10px 16px;
+    background: #0f172a;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
