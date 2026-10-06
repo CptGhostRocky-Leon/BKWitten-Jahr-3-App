@@ -9,7 +9,7 @@ self.addEventListener('install', (event) => {
                 '/offline',
                 '/offline.css',
                 '/manifest.webmanifest',
-                '/images/faq/schulgebäude.png',
+                '/images/faq/schulgebäude.webp',
             ]);
 
             const manifestResponse = await fetch('/build/manifest.json');

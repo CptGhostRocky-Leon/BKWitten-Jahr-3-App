@@ -14,4 +14,21 @@ if ('serviceWorker' in navigator) {
                 );
             });
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img');
+
+        images.forEach((image) => {
+            if (image.complete) {
+                return;
+            }
+
+            image.classList.add('opacity-0');
+
+            image.addEventListener('load', () => {
+                image.classList.remove('opacity-0');
+            });
+        });
+    });
+
 }
