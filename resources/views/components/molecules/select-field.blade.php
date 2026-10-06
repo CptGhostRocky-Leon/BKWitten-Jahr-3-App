@@ -14,7 +14,7 @@
     <select
         id="{{ $id }}"
         {{ $attributes->class([
-            'w-full rounded-lg border border-slate-300 bg-white px-4 py-3.5',
+            'w-full appearance-none rounded-lg border border-slate-300 bg-white px-4 py-3.5',
             'text-base text-slate-900 shadow-sm',
             'focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-200',
         ]) }}

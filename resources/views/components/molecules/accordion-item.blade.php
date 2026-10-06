@@ -20,7 +20,7 @@
                    text-slate-600 transition-transform duration-200"
             :class="{ 'rotate-180': isOpen('{{ $contentKey }}') }"
         >
-            <x-atoms.icons.chevron-down />
+            <x-atoms.chevron-down />
         </span>
     </button>
 @endif
