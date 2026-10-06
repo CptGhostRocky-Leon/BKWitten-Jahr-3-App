@@ -36,8 +36,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 /public/build/
-/public/hot/
+/public/hot
 /public/storage/
+/public/fonts-manifest.dev.json
 
 # Logs & Temp
 logs/

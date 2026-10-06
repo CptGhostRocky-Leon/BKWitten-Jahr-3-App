@@ -1,0 +1,10 @@
+{
+    "name": "BKWitten Informations-App",
+    "short_name": "BKWitten",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#f8fafc",
+    "theme_color": "#ffffff",
+    "description": "Informations-App des Berufskollegs Witten"
+}
