@@ -1,14 +1,43 @@
-const CACHE_NAME = 'bkwitten-faq-v7';
+const CACHE_NAME = 'bkwitten-faq-v6';
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll([
+        caches.open(CACHE_NAME).then(async (cache) => {
+
+            await cache.addAll([
                 '/faq',
                 '/offline',
+                '/offline.css',
                 '/manifest.webmanifest',
                 '/images/faq/schulgebäude.webp',
             ]);
+
+            const manifestResponse = await fetch('/build/manifest.json');
+            const manifest = await manifestResponse.json();
+
+            const assets = new Set([
+                '/build/manifest.json'
+            ]);
+
+            Object.values(manifest).forEach((entry) => {
+                if (entry.file) {
+                    assets.add('/build/' + entry.file);
+                }
+
+                if (entry.css) {
+                    entry.css.forEach((file) => {
+                        assets.add('/build/' + file);
+                    });
+                }
+
+                if (entry.assets) {
+                    entry.assets.forEach((file) => {
+                        assets.add('/build/' + file);
+                    });
+                }
+            });
+
+            await cache.addAll([...assets]);
         })
     );
 

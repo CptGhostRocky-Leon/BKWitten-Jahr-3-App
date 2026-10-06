@@ -10,8 +10,9 @@ class NewsFeedController extends Controller
     {
         $informationen = Information::query()
             ->orderByDesc('veroeffentlicht_am')
+            ->with('anhaenge')
             ->get();
-
+            
         return view('newsfeed', [
             'informationen' => $informationen,
         ]);
