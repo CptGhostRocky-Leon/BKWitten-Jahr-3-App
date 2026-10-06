@@ -4,9 +4,10 @@ return [
 
     // Linkes Menü (Slide-Over Drawer)
     'main' => [
-        [
-            'label' => 'Test',
+       [
+            'label' => 'Start',
             'route' => 'home',
+            'url' => '',
         ],
         [
             'label' => 'FAQ',
