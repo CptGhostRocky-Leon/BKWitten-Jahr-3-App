@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Information extends Model
 {
@@ -14,4 +15,9 @@ class Information extends Model
         'veroeffentlicht_am',
         'autor_id',
     ];
+
+    public function anhaenge(): HasMany
+    {
+        return $this->hasMany(Anhang::class);
+    }
 }

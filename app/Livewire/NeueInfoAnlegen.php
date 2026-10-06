@@ -13,21 +13,19 @@ class NeueInfoAnlegen extends Component
     public string $titel = '';
     public string $nachricht = '';
     public $anhang;
+    public ?string $erfolg = null;
 
     public function veroeffentlichen(): void
     {
+        $this->erfolg = null;
+
         $this->validate([
             'titel' => 'required|string|max:255',
             'nachricht' => 'required|string',
-            'anhang' => 'nullable|file|mimes:pdf,png,jpg|max:5120',
+            'anhang' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:5120',
         ]);
 
-        if ($this->anhang) {
-            $pfad = $this->anhang->store('anhaenge', 'public');
-            // TODO: $pfad in Anhang-Tabelle speichern, sobald diese existiert
-        }
-
-        Information::create([
+        $info = Information::create([
             'titel' => $this->titel,
             'nachricht' => $this->nachricht,
             'status' => 'veroeffentlicht',
@@ -36,8 +34,20 @@ class NeueInfoAnlegen extends Component
             'autor_id' => auth()->id(), // null, bis Login existiert
         ]);
 
+        if ($this->anhang) {
+            $dateiname = $this->anhang->getClientOriginalName();
+            $dateityp = $this->anhang->getMimeType();
+            $pfad = $this->anhang->store('anhaenge', 'public');
+
+            $info->anhaenge()->create([
+                'dateiname' => $dateiname,
+                'dateipfad' => $pfad,
+                'dateityp' => $dateityp,
+            ]);
+        }
+
         $this->reset(['titel', 'nachricht', 'anhang']);
-        session()->flash('erfolg', 'Info wurde veröffentlicht.');
+        $this->erfolg = 'Information wurde erfolgreich erstellt.';
     }
 
     public function render()
