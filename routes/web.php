@@ -11,3 +11,6 @@ Route::get('/neue-info-anlegen', NeueInfoAnlegen::class) ->name('info.anlegen');
 Route::view('/offline', 'offline')->name('offline');
 
 Route::view('/faq', 'faq')->name('faq');
+
+Route::view('/news', 'newsfeed')
+    ->name('newsfeed');
