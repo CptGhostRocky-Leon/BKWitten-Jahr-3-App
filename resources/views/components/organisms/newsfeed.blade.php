@@ -61,6 +61,13 @@
                     <p class="mt-6 whitespace-pre-line leading-7 text-slate-700">
                         {{ $information->nachricht }}
                     </p>
+
+                    @foreach ($information->anhaenge as $anhang)
+                        <a href="{{ $anhang->url }}" target="_blank" class="block mt-4 text-indigo-600 underline">
+                            {{ $anhang->dateiname }}
+                        </a>
+                    @endforeach
+
                 </article>
             @empty
                 <div
