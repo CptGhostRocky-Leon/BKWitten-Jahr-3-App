@@ -22,6 +22,10 @@ class NeueInfoAnlegen extends Component
         return [
             'titel.required' => 'Bitte gib einen Titel ein.',
             'nachricht.required' => 'Bitte gib eine Nachricht ein.',
+            'anhang.array' => 'Die Anhänge sind ungültig.',
+            'anhang.*.mimes' => 'Erlaubt sind nur PDF-, PNG- und JPG-Dateien.',
+            'anhang.*.max' => 'Eine Datei darf maximal 5 MB groß sein.',
+            'anhang.*.uploaded' => 'Die Datei konnte nicht hochgeladen werden. Sie ist evtl. zu groß.',
         ];
     }
 
