@@ -32,6 +32,8 @@
             {{ $slot }}
         </main>
 
+        <x-molecules.footer/>
+
         @livewireScripts
     </body>
 </html>
