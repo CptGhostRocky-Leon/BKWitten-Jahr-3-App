@@ -2,10 +2,12 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Information;
 
+#[Layout('components.layouts.app', ['title' => 'Neue Info anlegen'])]
 class NeueInfoAnlegen extends Component
 {
     use WithFileUploads;
@@ -14,6 +16,14 @@ class NeueInfoAnlegen extends Component
     public string $nachricht = '';
     public $anhang = [];
     public ?string $erfolg = null;
+
+    public function messages(): array
+    {
+        return [
+            'titel.required' => 'Bitte gib einen Titel ein.',
+            'nachricht.required' => 'Bitte gib eine Nachricht ein.',
+        ];
+    }
 
     public function veroeffentlichen(): void
     {

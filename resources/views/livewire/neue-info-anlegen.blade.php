@@ -5,8 +5,6 @@
         </div>
     @endif
 
-    <h1 class="text-xl font-semibold text-slate-900">Neue Info anlegen</h1>
-
     <div>
         <label class="block text-sm font-medium text-slate-700 mb-1">Titel *</label>
         <x-atoms.input wire:model="titel" placeholder="Titel der Information" />
