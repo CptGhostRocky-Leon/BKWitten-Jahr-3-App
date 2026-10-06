@@ -225,17 +225,9 @@ return [
         'gebaeudeplan' => [
             'title' => 'Gebäudeplan',
             'description' => 'Hier findest du eine Übersicht über die Gebäude und Räume des Berufskollegs Witten.',
-            'image' => 'images/faq/schulgebäude.png',
+            'image' => 'images/faq/schulgebäude.webp',
             'content' => [
-                [
-                    'title' => 'Schulgebäude',
-                    'blocks' => [
-                        [
-                            'type' => 'text',
-                            'text' => 'Der Gebäudeplan hilft dir dabei, die verschiedenen Gebäude und Räume des Berufskollegs schnell zu finden.',
-                        ],
-                    ],
-                ],
+                
             ],
         ],
 
