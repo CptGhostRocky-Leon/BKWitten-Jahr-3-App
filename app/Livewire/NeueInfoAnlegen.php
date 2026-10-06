@@ -12,7 +12,7 @@ class NeueInfoAnlegen extends Component
 
     public string $titel = '';
     public string $nachricht = '';
-    public $anhang;
+    public $anhang = [];
     public ?string $erfolg = null;
 
     public function veroeffentlichen(): void
@@ -22,7 +22,8 @@ class NeueInfoAnlegen extends Component
         $this->validate([
             'titel' => 'required|string|max:255',
             'nachricht' => 'required|string',
-            'anhang' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:5120',
+            'anhang' => 'nullable|array',
+            'anhang.*' => 'file|mimes:pdf,png,jpg|max:5120',
         ]);
 
         $info = Information::create([
@@ -34,15 +35,11 @@ class NeueInfoAnlegen extends Component
             'autor_id' => auth()->id(), // null, bis Login existiert
         ]);
 
-        if ($this->anhang) {
-            $dateiname = $this->anhang->getClientOriginalName();
-            $dateityp = $this->anhang->getMimeType();
-            $pfad = $this->anhang->store('anhaenge', 'public');
-
+        foreach ($this->anhang as $datei) {
             $info->anhaenge()->create([
-                'dateiname' => $dateiname,
-                'dateipfad' => $pfad,
-                'dateityp' => $dateityp,
+                'dateiname' => $datei->getClientOriginalName(),
+                'dateipfad' => $datei->store('anhaenge', 'public'),
+                'dateityp' => $datei->getMimeType(),
             ]);
         }
 

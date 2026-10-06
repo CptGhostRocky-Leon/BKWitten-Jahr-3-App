@@ -8,32 +8,46 @@
     <h1 class="text-xl font-semibold text-slate-900">Neue Info anlegen</h1>
 
     <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Titel</label>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Titel *</label>
         <x-atoms.input wire:model="titel" placeholder="Titel der Information" />
-        @error('titel') <p class="text-sm text-rose-600 mt-1">{{ $message }}</p> @enderror
+        @error('titel')
+            <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Inhalt</label>
+        <label class="block text-sm font-medium text-slate-700 mb-1">Inhalt *</label>
         <x-atoms.textarea wire:model="nachricht" placeholder="Freitext..." />
-        @error('nachricht') <p class="text-sm text-rose-600 mt-1">{{ $message }}</p> @enderror
+        @error('nachricht')
+            <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
+        @enderror
     </div>
 
     <div>
-    <label class="block text-sm font-medium text-slate-700 mb-1">Anhang (PDF, PNG, JPG)</label>
-    <x-atoms.input type="file" wire:model="anhang" />
-    @error('anhang') <p class="text-sm text-rose-600 mt-1">{{ $message }}</p> @enderror
+        <label class="block text-sm font-medium text-slate-700 mb-1">Anhänge (PDF, PNG, JPG)</label>
+        <label for="anhang-input"
+            class="block w-full cursor-pointer rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-500">
+            Dateien auswählen
+        </label>
+        <input id="anhang-input" type="file" wire:model="anhang" multiple class="hidden" />
+        @error('anhang')
+            <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
+        @enderror
+        @error('anhang.*')
+            <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
+        @enderror
 
-    @if ($anhang)
-        <p class="text-xs text-slate-500 mt-1">Ausgewählt: {{ $anhang->getClientOriginalName() }}</p>
-    @endif
+        @foreach ($anhang as $datei)
+            <p class="text-xs text-slate-500 mt-1">Ausgewählt: {{ $datei->getClientOriginalName() }}</p>
+        @endforeach
     </div>
-
-        <p class="text-sm text-slate-500">
-        Veröffentlichungsdatum: {{ now()->format('d.m.Y') }} 
+    <p class="text-sm text-slate-500">
+        Veröffentlichungsdatum: {{ now()->format('d.m.Y') }}
     </p>
+
 
     <x-atoms.button wire:click="veroeffentlichen">
         Veröffentlichen
     </x-atoms.button>
+    <p class ="text-xs text-slate-500">* Pflichtfelder</p>
 </div>
