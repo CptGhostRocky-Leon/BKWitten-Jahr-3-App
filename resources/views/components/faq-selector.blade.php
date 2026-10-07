@@ -73,7 +73,6 @@ new class extends Component
                     :src="asset($section['image'])"
                     :alt="$section['title']"
                 />
-                    />
                 </div>
             @endif
 
@@ -156,8 +155,6 @@ new class extends Component
                                                     :email="$block['email'] ?? null"
                                                     :focus="$block['focus'] ?? null"
                                                 />
-
-                                            //Tabelle
                                             @elseif (($block['type'] ?? '') === 'table')
                                                 @if (!empty($block['title']))
                                                     <h4
