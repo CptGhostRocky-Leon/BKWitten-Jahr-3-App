@@ -4,10 +4,28 @@ return [
 
     // Linkes Menü (Slide-Over Drawer)
     'main' => [
-       [
+        [
             'label' => 'Start',
             'route' => 'home',
             'url' => '',
+        ],
+        [
+            'label' => 'Veranstaltungen',
+            'route' => 'information.kategorie',
+            'url' => '#',
+            'kategorie' => 'Veranstaltungen',
+        ],
+        [
+            'label' => 'Angebote',
+            'route' => 'information.kategorie',
+            'url' => '#',
+            'kategorie' => 'Angebote',
+        ],
+        [
+            'label' => 'Organisatorisches',
+            'route' => 'information.kategorie',
+            'url' => '#',
+            'kategorie' => 'Organisatorisches',
         ],
         [
             'label' => 'FAQ',

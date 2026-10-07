@@ -17,4 +17,35 @@ class NewsFeedController extends Controller
             'informationen' => $informationen,
         ]);
     }
+
+    public function show(Information $information)
+    {
+        $information->load('anhaenge');
+
+        return view('information.show', [
+            'information' => $information,
+        ]);
+    }
+
+    public function kategorie(string $kategorie)
+    {
+        $erlaubteKategorien = [
+            'Veranstaltungen',
+            'Angebote',
+            'Organisatorisches',
+        ];
+
+        abort_unless(in_array($kategorie, $erlaubteKategorien, true), 404);
+
+        $informationen = Information::query()
+            ->where('kategorie', $kategorie)
+            ->orderByDesc('veroeffentlicht_am')
+            ->with('anhaenge')
+            ->get();
+
+        return view('newsfeed', [
+            'informationen' => $informationen,
+            'kategorie' => $kategorie,
+        ]);
+    }
 }

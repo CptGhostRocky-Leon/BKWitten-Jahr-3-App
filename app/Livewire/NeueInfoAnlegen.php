@@ -64,6 +64,16 @@ class NeueInfoAnlegen extends Component
         $this->redirectRoute('home', navigate: true);
     }
 
+    public function entferneAnhang(int $index): void
+    {
+        if (isset($this->anhang[$index])) {
+            unset($this->anhang[$index]);
+
+            // Array-Indizes neu nummerieren
+            $this->anhang = array_values($this->anhang);
+        }
+    }
+
     public function render()
     {
         return view('livewire.neue-info-anlegen');
