@@ -78,8 +78,7 @@
             @empty
                 <div
                     class="rounded-2xl border border-dashed border-slate-300
-                           bg-white px-6 py-14 text-center shadow-sm"
-                >
+                           bg-white px-6 py-14 text-center shadow-sm">
                     <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -88,13 +87,15 @@
                             stroke="currentColor"
                             stroke-width="1.8"
                             class="h-7 w-7 text-indigo-600"
-                            aria-hidden="true"
-                        >
+                            aria-hidden="true">
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M15.75 10.5h.008v.008h-.008V10.5ZM12 10.5h.008v.008H12V10.5ZM8.25 10.5h.008v.008H8.25V10.5ZM6 19.5l-2.25 1.5.75-3.75A8.25 8.25 0 1 1 12 20.25a8.22 8.22 0 0 1-6-2.58"
+                                d="M12 3.75a8.25 8.25 0 0 0-7.1 12.45L4.5 20.25l4.05-1.35A8.25 8.25 0 1 0 12 3.75Z"
                             />
+                            <circle cx="8.75" cy="12" r=".6" fill="currentColor" stroke="none" />
+                            <circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none" />
+                            <circle cx="15.25" cy="12" r=".6" fill="currentColor" stroke="none" />
                         </svg>
                     </div>
 
