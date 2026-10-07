@@ -32,7 +32,7 @@
             {{ $slot }}
         </main>
 
-        <x-molecules.footer/>
+        <x-organisms.footer/>
 
         @livewireScripts
     </body>

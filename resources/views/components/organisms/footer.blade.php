@@ -1,4 +1,4 @@
-<footer class="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 bg-white/95 shadow-sm backdrop-blur">
+<footer class="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white/95 shadow-sm backdrop-blur">
     <div class="flex flex-col items-center px-4 py-4 text-center text-sm text-gray-500">
         <nav aria-label="Footer navigation">
             <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
