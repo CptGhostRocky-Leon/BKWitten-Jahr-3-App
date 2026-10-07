@@ -66,8 +66,16 @@
                     {{ $kategorie }}
                 </h1>
 
+                @php
+                    $beschreibungen = [
+                        'Veranstaltungen' => 'Hier findest du Informationen über vergangene und kommende Veranstaltungen.',
+                        'Organisatorisches' => 'Hier findest du wichtige organisatorische Informationen für den Schulalltag.',
+                        'Angebote' => 'Hier findest du Informationen zu außerunterrichtlichen Angeboten wie Zusatzkursen, AGs und weiteren Möglichkeiten, die Schule aktiv mitzugestalten.',
+                    ];
+                @endphp
+
                 <p class="mx-auto mt-4 max-w-2xl text-slate-600">
-                    Hier findest du Informationen aus dem Bereich {{ strtolower($kategorie) }}.
+                    {{ $beschreibungen[$kategorie] ?? '' }}
                 </p>
             @else
                 <h1 class="mt-2 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
