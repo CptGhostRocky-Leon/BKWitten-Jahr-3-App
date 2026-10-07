@@ -14,6 +14,7 @@ class NeueInfoAnlegen extends Component
 
     public string $titel = '';
     public string $nachricht = '';
+    public ?string $kategorie = null;
     public $anhang = [];
     public ?string $erfolg = null;
 
@@ -22,6 +23,7 @@ class NeueInfoAnlegen extends Component
         return [
             'titel.required' => 'Bitte gib einen Titel ein.',
             'nachricht.required' => 'Bitte gib eine Nachricht ein.',
+            'kategorie' => 'nullable|in:Veranstaltungen,Angebote,Organisatorisches',
             'anhang.array' => 'Die Anhänge sind ungültig.',
             'anhang.*.mimes' => 'Erlaubt sind nur PDF-, PNG- und JPG-Dateien.',
             'anhang.*.max' => 'Eine Datei darf maximal 5 MB groß sein.',
@@ -43,6 +45,7 @@ class NeueInfoAnlegen extends Component
         $info = Information::create([
             'titel' => $this->titel,
             'nachricht' => $this->nachricht,
+            'kategorie' => $this->kategorie,
             'status' => 'veroeffentlicht',
             'ist_wichtig' => false,
             'veroeffentlicht_am' => now(),

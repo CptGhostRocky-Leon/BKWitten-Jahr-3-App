@@ -14,6 +14,7 @@ class Information extends Model
         'ist_wichtig',
         'veroeffentlicht_am',
         'autor_id',
+        'kategorie',
     ];
 
     public function anhaenge(): HasMany
