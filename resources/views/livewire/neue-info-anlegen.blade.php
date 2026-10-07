@@ -10,10 +10,7 @@
             Titel *
         </label>
 
-        <x-atoms.input
-            wire:model="titel"
-            placeholder="Titel der Information"
-        />
+        <x-atoms.input wire:model="titel" placeholder="Titel der Information" />
 
         @error('titel')
             <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
@@ -21,20 +18,14 @@
     </div>
 
     <div>
-        <label
-            for="kategorie"
-            class="block text-sm font-medium text-slate-700 mb-1"
-        >
+        <label for="kategorie" class="block text-sm font-medium text-slate-700 mb-1">
             Kategorie
         </label>
 
-        <select
-            id="kategorie"
-            wire:model="kategorie"
+        <select id="kategorie" wire:model="kategorie"
             class="mt-1 block w-full rounded-lg border border-slate-300
                    bg-transparent px-3 py-2 text-sm text-slate-900
-                   focus:border-indigo-500 focus:ring-indigo-500"
-        >
+                   focus:border-indigo-500 focus:ring-indigo-500">
             <option value="">Keine Kategorie ausgewählt</option>
             <option value="Veranstaltungen">Veranstaltungen</option>
             <option value="Angebote">Angebote</option>
@@ -51,10 +42,7 @@
             Inhalt *
         </label>
 
-        <x-atoms.textarea
-            wire:model="nachricht"
-            placeholder="Freitext..."
-        />
+        <x-atoms.textarea wire:model="nachricht" placeholder="Freitext..." />
 
         @error('nachricht')
             <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
@@ -66,20 +54,12 @@
             Anhänge (PDF, PNG, JPG)
         </label>
 
-        <label
-            for="anhang-input"
-            class="block w-full cursor-pointer rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-500"
-        >
+        <label for="anhang-input"
+            class="block w-full cursor-pointer rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-500">
             Dateien auswählen
         </label>
 
-        <input
-            id="anhang-input"
-            type="file"
-            wire:model="anhang"
-            multiple
-            class="hidden"
-        />
+        <input id="anhang-input" type="file" wire:model="anhang" multiple class="hidden" />
 
         @error('anhang')
             <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
@@ -90,32 +70,30 @@
         @enderror
 
         @foreach ($anhang as $index => $datei)
-            <div class="mt-2 flex min-w-0 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+            <div
+                class="mt-2 flex min-w-0 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
                 <span class="min-w-0 truncate text-xs text-slate-600">
                     {{ $datei->getClientOriginalName() }}
                 </span>
 
-                <button
-                    type="button"
-                    wire:click="entferneAnhang({{ $index }})"
+                <button type="button" wire:click="entferneAnhang({{ $index }})"
                     wire:confirm="Soll der Anhang „{{ $datei->getClientOriginalName() }}“ wirklich gelöscht werden?"
                     class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full
                         text-slate-500 transition hover:bg-rose-100 hover:text-rose-600
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
-                    aria-label="Anhang entfernen"
-                >
+                    aria-label="Anhang entfernen">
                     ×
                 </button>
             </div>
         @endforeach
-        
+
     </div>
 
     <p class="text-sm text-slate-500">
         Veröffentlichungsdatum: {{ now()->format('d.m.Y') }}
     </p>
 
-    <x-atoms.button wire:click="veroeffentlichen">
+    <x-atoms.button wire:click="veroeffentlichen" class="w-full">
         Veröffentlichen
     </x-atoms.button>
 
