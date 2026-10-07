@@ -15,11 +15,7 @@ return [
             'url' => '#',
         ],
         [
-            'label' => 'Hier kann weiteres stehen',
-            'url' => '#',
-        ],
-        [
-            'label' => 'Homepage',
+            'label' => 'BKW-Homepage',
             'url' => 'https://www.bkwitten.net/',
         ],
         [
