@@ -13,6 +13,7 @@ return [
             'label' => 'FAQ',
             'route' => 'faq',
             'url' => '#',
+            // Unterseiten bzw. Dropdowns sind via faq.php dynamisch generiert
         ],
         [
             'label' => 'BKW-Homepage',
