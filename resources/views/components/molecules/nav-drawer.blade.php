@@ -22,7 +22,7 @@
         class="fixed inset-y-0 left-0 max-w-xs w-full bg-white shadow-xl z-50 flex flex-col"
     >
         <div class="flex items-center justify-between px-5 h-16 border-b border-slate-100">
-            <span class="font-bold text-slate-900 text-base">Navigation</span>
+            <span class="font-bold text-slate-900 text-base">BKW Info</span>
             
             <x-atoms.icon-button @click="drawerOpen = false" label="Menü schließen">
                 <x-atoms.icons.close />
