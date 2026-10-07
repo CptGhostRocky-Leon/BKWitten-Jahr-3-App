@@ -56,12 +56,23 @@
                             @endif
                         </div>
 
-                        <span
-                            class="w-fit rounded-full bg-indigo-50 px-3 py-1 text-xs
-                                   font-semibold text-indigo-700"
-                        >
-                            Neuigkeit
-                        </span>
+                     @php
+                        $kategorie = $information->kategorie ?: 'Neuigkeit';
+
+                        $farben = [
+                            'Veranstaltungen' => 'bg-blue-100 text-blue-700',
+                            'Angebote' => 'bg-green-100 text-green-700',
+                            'Organisatorisches' => 'bg-orange-100 text-orange-700',
+                            'Neuigkeit' => 'bg-indigo-100 text-indigo-700',
+                        ];
+                    @endphp
+
+                    <span
+                        class="inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold
+                            {{ $farben[$kategorie] ?? 'bg-indigo-100 text-indigo-700' }}"
+                    >
+                        {{ $kategorie }}
+                    </span>
                     </div>
 
                     <p class="mt-6 whitespace-pre-line leading-7 text-slate-700">
