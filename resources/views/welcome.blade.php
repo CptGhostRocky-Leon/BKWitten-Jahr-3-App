@@ -5,7 +5,7 @@
                 Schulprojekt
             </span>
             <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
-                BKWitten Jahr 3 App
+                BKW Info
             </h1>
             <p class="text-sm text-slate-500">
                 Ich bin eine Lokale Counter App zum Testen von Livewire-Komponenten.

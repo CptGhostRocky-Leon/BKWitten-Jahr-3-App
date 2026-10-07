@@ -109,7 +109,7 @@
      
         {{-- Fußbereich --}}
         <div class="p-4 border-t border-slate-100 text-xs text-slate-400 text-center">
-            BKWitten Jahr 3 App
+            BKW Info
         </div>
     </div>
 </div>
