@@ -4,10 +4,14 @@ use App\Livewire\NeueInfoAnlegen;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsFeedController;
 
-
 Route::get('/', [NewsFeedController::class, 'index'])
     ->name('home');
 
+Route::get('/information/{information}', [NewsFeedController::class, 'show'])
+    ->name('information.show');
+
+Route::get('/kategorie/{kategorie}', [NewsFeedController::class, 'kategorie'])
+->name('information.kategorie');
 
 Route::get('/neue-info-anlegen', NeueInfoAnlegen::class) ->name('info.anlegen');
 Route::view('/offline', 'offline')->name('offline');

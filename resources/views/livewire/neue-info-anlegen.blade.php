@@ -89,11 +89,26 @@
             <p class="text-sm text-rose-600 mt-1">{{ $message }}</p>
         @enderror
 
-        @foreach ($anhang as $datei)
-            <p class="text-xs text-slate-500 mt-1">
-                Ausgewählt: {{ $datei->getClientOriginalName() }}
-            </p>
+        @foreach ($anhang as $index => $datei)
+            <div class="mt-2 flex min-w-0 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                <span class="min-w-0 truncate text-xs text-slate-600">
+                    {{ $datei->getClientOriginalName() }}
+                </span>
+
+                <button
+                    type="button"
+                    wire:click="entferneAnhang({{ $index }})"
+                    wire:confirm="Soll der Anhang „{{ $datei->getClientOriginalName() }}“ wirklich gelöscht werden?"
+                    class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full
+                        text-slate-500 transition hover:bg-rose-100 hover:text-rose-600
+                        focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                    aria-label="Anhang entfernen"
+                >
+                    ×
+                </button>
+            </div>
         @endforeach
+        
     </div>
 
     <p class="text-sm text-slate-500">

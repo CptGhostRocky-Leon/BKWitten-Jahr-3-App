@@ -33,8 +33,22 @@
             @foreach(config('navigation.main', []) as $item)
                 @php
                     $hasRoute = !empty($item['route']) && Route::has($item['route']);
-                    $href = $hasRoute ? route($item['route']) : ($item['url'] ?? '#');
+
+                    if ($hasRoute) {
+                        if (!empty($item['kategorie'])) {
+                            $href = route($item['route'], ['kategorie' => $item['kategorie']]);
+                        } else {
+                            $href = route($item['route']);
+                        }
+                    } else {
+                        $href = $item['url'] ?? '#';
+                    }
+
                     $isActive = !empty($item['route']) && request()->routeIs($item['route']);
+
+                        if ($isActive && !empty($item['kategorie'])) {
+                            $isActive = request()->route('kategorie') === $item['kategorie'];
+                        }
                 @endphp
 
                 @if(($item['route'] ?? '') === 'faq')
