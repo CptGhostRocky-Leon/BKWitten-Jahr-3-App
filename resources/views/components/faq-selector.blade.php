@@ -18,6 +18,23 @@ new class extends Component
         selectedSection: new URLSearchParams(window.location.search).get('section') || '',
         openContent: {},
 
+        init() {
+            this.$watch('selectedSection', (value) => {
+                const url = new URL(window.location.href);
+                if (value) {
+                    url.searchParams.set('section', value);
+                } else {
+                    url.searchParams.delete('section');
+                }
+                window.history.pushState({}, '', url);
+            });
+
+            window.addEventListener('popstate', () => {
+                this.selectedSection = new URLSearchParams(window.location.search).get('section') || '';
+                this.openContent = {};
+            });
+        },
+
         toggleContent(key) {
             this.openContent[key] = !this.openContent[key];
         },
